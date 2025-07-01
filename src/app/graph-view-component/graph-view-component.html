@@ -1,0 +1,15 @@
+<div class="container">
+  <app-sidebar-component
+    class="sidebar"
+    [linkedUsers]="linkedUsers"
+    [currentUser]="currentUser"
+    (onClick)="onUserClick($event)"
+  ></app-sidebar-component>
+
+  <app-graph-component
+    class="graph"
+    [linkedUsers]="linkedUsers"
+    [currentUser]="currentUser"
+    (onDoubleClick)="onUserClick($event)"
+  ></app-graph-component>
+</div>

@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --color-bg: #111827;
+  --color-bg-light: #1F2937;
+  --color-bg-lighter: #374151;
+  --color-border: #374151;
+  --color-text-primary: #E5E7EB;
+  --color-text-secondary: #9CA3AF;
+  --color-text-placeholder: #6B7280;
+  --color-brand: #4F46E5;
+  --color-brand-hover: #4338CA;
+  --color-white: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-bg);
+}
+
+/* --- Спиннер загрузки (остался без изменений) --- */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--color-white);
+  border-bottom-color: var(--color-brand);
+  border-radius: 50%;
+  display: inline-block;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

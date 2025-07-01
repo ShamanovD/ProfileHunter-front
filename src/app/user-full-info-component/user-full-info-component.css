@@ -1,0 +1,155 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-container.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  background-color: var(--color-bg-light);
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 500px;
+  z-index: 10;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(17, 24, 39, 0.5);
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  border-radius: 50%;
+  z-index: 15;
+}
+.modal-close-button:hover {
+  color: var(--color-white);
+  background: rgba(17, 24, 39, 0.8);
+}
+
+/* --- Стили для контента профиля --- */
+.profile-header {
+  width: 100%;
+  height: 250px;
+  position: relative;
+}
+.profile-main-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-gallery {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(17, 24, 39, 0.5);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.gallery-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 0.25rem;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+.gallery-thumb:hover, .gallery-thumb.active {
+  border-color: var(--color-brand);
+}
+
+.profile-body {
+  padding: 1.5rem;
+}
+
+.profile-identity {
+  margin-bottom: 1.5rem;
+}
+.profile-fullname {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-white);
+}
+.profile-username {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+
+.profile-details {
+  display: grid;
+  gap: 1rem;
+}
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-bg-light);
+}
+.detail-item:last-child {
+  border-bottom: none;
+}
+.detail-label {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+.detail-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.modal-overlay {
+  position: fixed; /* Фиксированное позиционирование относительно окна просмотра */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+  display: flex; /* Используем flexbox для центрирования содержимого */
+  justify-content: center; /* Центрируем по горизонтали */
+  align-items: center; /* Центрируем по вертикали */
+  z-index: 1000; /* Убедитесь, что он выше других элементов */
+}
+
+/* Стили, чтобы сделать его "полноэкранным" по необходимости, если он должен занимать почти всю страницу */
+.modal-full-width-height {
+  width: 90%; /* Или 100% если нужен прямо совсем полный экран без отступов */
+  height: 90%;
+  /* flex-direction: column; если контент внутри вертикально */
+}

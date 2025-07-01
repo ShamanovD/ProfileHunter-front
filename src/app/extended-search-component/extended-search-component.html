@@ -1,0 +1,47 @@
+<div class="modal-overlay">
+  <div class="modal-content modal-full-width-height">
+    <h2 class="modal-title">Extended search setting</h2>
+    <p class="modal-subtitle">Select additional params for search</p>
+
+    <form class="modal-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="form-section">
+        <h3 class="modal-form__section-title">Search type</h3>
+        <div class="radio-group">
+          @for (searchType of searchTypes; track searchType) {
+            <label class="radio-label">
+              <input type="radio" [value]="searchType" formControlName="searchType">
+              <span class="radio-custom"></span>
+              <span style="
+            background-color: var(--color-bg-light);
+            color: var(--color-text-secondary);">{{ searchType }}</span>
+            </label>
+          }
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3 class="modal-form__section-title">Platforms to search</h3>
+        <div class="modal-form__checkbox-grid">
+          @for (sourceType of sourceTypes; track sourceType) {
+            <!-- Каждый элемент также обернут в label -->
+            <label class="checkbox-label">
+              <input type="checkbox" [value]="sourceType"
+                     (change)="onPlatformChange($event)"
+                     [checked]="form.get('sourceTypes')?.value.includes(sourceType)">
+              <span class="checkbox-custom"></span>
+              <span style="
+            background-color: var(--color-bg-light);
+            color: var(--color-text-secondary);">{{ sourceType }}</span>
+            </label>
+          }
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="button button--primary" type="submit" [disabled]="form.invalid">Применить</button>
+        <button class="button button--secondary" type="button" (click)="onClose()">Отмена</button>
+      </div>
+    </form>
+  </div>
+</div>

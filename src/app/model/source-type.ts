@@ -1,0 +1,8 @@
+export enum SourceType {
+
+  TELEGRAM = "TELEGRAM",
+  INSTAGRAM = "INSTAGRAM",
+  TWITTER = "TWITTER",
+  YOUTUBE = "YOUTUBE"
+
+}

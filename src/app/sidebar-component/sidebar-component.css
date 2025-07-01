@@ -1,0 +1,133 @@
+.sidebar-container {
+  width: 100%; /* Ширина сайдбара */
+  height: calc(100vh - 100px); /* Для демонстрации, в вашем случае будет 100% */
+  background-color: var(--color-bg-light);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Прячем все, что выходит за пределы */
+}
+
+.sidebar-section {
+  padding: 1rem 1.25rem;
+}
+
+.section-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+/* Стиль для карточки пользователя */
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.user-card:hover {
+  background-color: rgba(55, 65, 81, 0.5); /* var(--border-color) с прозрачностью */
+}
+
+/* Особый стиль для центральной ноды */
+.user-card.central {
+  background-color: rgba(79, 70, 229, 0.1); /* var(--brand-color) с прозрачностью */
+  border: 1px solid var(--color-brand);
+}
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  position: relative;
+  border: 2px solid var(--color-border);
+}
+
+.user-avatar img {
+  width: 100%; /* Изображение занимает 100% ширины родителя */
+  height: 100%; /* Изображение занимает 100% высоты родителя */
+  object-fit: cover; /* ОЧЕНЬ ВАЖНО: изображение будет покрывать всю область контейнера, обрезая лишнее, сохраняя пропорции */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.user-card.central .user-avatar img {
+  border-color: var(--color-brand);
+}
+
+.user-info {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.user-fullname {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-nickname {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.platform-name {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-top: 4px; /* Небольшой отступ сверху */
+}
+
+.platform-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--color-text-secondary);
+}
+
+/* Секция со списком */
+.linked-nodes-section {
+  flex-grow: 1; /* Занимает все оставшееся место */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: 0;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto; /* Включаем скролл, если список не помещается */
+  padding-right: 0.5rem; /* Немного места для скроллбара */
+}
+
+/* Стилизация скроллбара для Webkit-браузеров (Chrome, Safari) */
+.user-list::-webkit-scrollbar {
+  width: 6px;
+}
+.user-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.user-list::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 10px;
+}
+.user-list::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-secondary);
+}

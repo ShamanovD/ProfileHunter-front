@@ -1,0 +1,24 @@
+<div class="search-block">
+  <form class="search-form" [formGroup]="form" (ngSubmit)="submitSearch()">
+    <div class="search-form__input-group">
+      <label class="search-form__label" for="username">Username</label>
+
+      <input id="username" class="search-form__input" type="text" formControlName="username">
+    </div>
+
+    <div class="search-form__input-group">
+      <label for="sourceSearch" class="search-form__label">Source search</label>
+
+      <select id="sourceSearch" class="search-form__selector" formControlName="sourceType">
+        @for (item of searchTypes; track item) {
+          <option [value]="item">{{ item }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="search-form__actions">
+      <button type="submit" class="search-form__button--primary" [disabled]="form.invalid">Submit</button>
+      <button type="button" class="search-form__button--secondary" (click)="onShowExtendedSettings()">Extended setting</button>
+    </div>
+  </form>
+</div>

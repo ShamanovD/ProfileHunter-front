@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.sidebar {
+  width: 30%;
+  height: 100%;
+}
+
+.graph {
+  width: 70%;
+  height: 100%;
+}

@@ -1,0 +1,155 @@
+/* Переменные из нашего дизайна. Их можно вынести в :root в глобальном файле стилей. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:host {
+  --bg-color: #111827;
+  --bg-light: #1F2937;
+  --border-color: #374151;
+  --text-primary: #E5E7EB;
+  --text-secondary: #9CA3AF;
+  --brand-color: #4F46E5;
+  --brand-hover: #4338CA;
+  --white: #FFFFFF;
+}
+
+/* Контейнер всей панели */
+.search-block {
+  background-color: var(--bg-light);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Форма теперь использует Flexbox для выравнивания */
+.search-form {
+  display: flex;
+  align-items: flex-end; /* Выравниваем всё по нижней границе */
+  gap: 1rem; /* Пространство между элементами */
+  background-color: var(--bg-light);
+}
+
+/* Группа "лейбл + инпут" */
+.search-form__input-group {
+  background-color: var(--bg-light);
+  flex-grow: 1; /* Поле с никнеймом будет занимать всё доступное место */
+}
+.search-form__input-group:nth-child(2) {
+  flex-grow: 0; /* Группа с селектом не будет растягиваться */
+  min-width: 200px;
+}
+
+/* Стили для лейблов */
+.search-form__label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+  background-color: var(--bg-light);
+}
+
+/* Стили для поля ввода */
+.search-form__input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  color: var(--white);
+  transition: box-shadow 0.2s;
+}
+
+.search-form__input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--brand-color);
+}
+
+/* --- Стили для кастомного SELECT --- */
+.search-form__select-wrapper {
+  position: relative;
+  border-radius: 0.5rem;
+  /* Убираем фон отсюда, так как он будет на самом селекторе */
+  border: 1px solid var(--border-color);
+  transition: box-shadow 0.2s;
+}
+.search-form__select-wrapper:focus-within {
+  box-shadow: 0 0 0 2px var(--brand-color);
+}
+
+.search-form__selector {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: var(--bg-color); /* ИЗМЕНЕНО: был transparent */
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  border-radius: inherit; /* Наследуем скругление от родителя */
+}
+.search-form__selector:focus {
+  outline: none;
+}
+
+.search-form__select-arrow {
+  position: absolute;
+  top: 0; right: 0; height: 100%;
+  width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  color: var(--text-secondary);
+}
+/* Стили для выпадающих опций (могут не работать в некоторых браузерах) */
+.search-form__selector option {
+  background: var(--bg-light);
+  color: var(--text-primary);
+}
+
+
+/* Блок с кнопками */
+.search-form__actions {
+  display: flex;
+  gap: 0.75rem;
+  background-color: var(--bg-light);
+}
+
+/* Общие стили для кнопок */
+[class*="search-form__button--"] {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+[class*="search-form__button--"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Основная кнопка */
+.search-form__button--primary {
+  background-color: var(--brand-color);
+  color: var(--white);
+  border-color: var(--brand-color);
+}
+.search-form__button--primary:not(:disabled):hover {
+  background-color: var(--brand-hover);
+}
+
+/* Второстепенная кнопка */
+.search-form__button--secondary {
+  background-color: var(--color-bg);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+.search-form__button--secondary:not(:disabled):hover {
+  background-color: var(--border-color);
+  color: var(--white);
+}
