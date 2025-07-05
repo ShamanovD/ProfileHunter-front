@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {LinkedSearchFilter} from '../model/linked-search-filter';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {SourceType} from '../model/source-type';
+import {SourceType, SourceTypeMap} from '../model/source-type';
 import {SearchType} from '../model/search-type';
 
 @Component({
@@ -16,8 +16,10 @@ import {SearchType} from '../model/search-type';
 export class ExtendedSearchComponent implements OnInit {
 
   form!: FormGroup;
-  sourceTypes: string[] = Object.values(SourceType);
+  sourceTypes: SourceType[] = Object.entries(SourceType).map(item => item[1]);
   searchTypes: string[] = Object.values(SearchType);
+
+  readonly sourceTypeMap = SourceTypeMap;
 
   @Input() linkedSearchFilter!: LinkedSearchFilter;
 

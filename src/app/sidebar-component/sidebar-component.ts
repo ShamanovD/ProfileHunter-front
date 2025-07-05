@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {UserInfo} from '../model/user-info';
+import { SourceTypeMap } from '../model/source-type';
 
 @Component({
   selector: 'app-sidebar-component',
@@ -12,12 +13,11 @@ export class SidebarComponent {
   @Input() linkedUsers !: UserInfo[];
   @Input() currentUser !: UserInfo;
 
+  readonly SourceTypeMap = SourceTypeMap;
+
   @Output() onClick = new EventEmitter<UserInfo>();
 
   onUserClick(currentUser: UserInfo) {
-    console.log('clicked onUserClick');
-    console.log(currentUser);
-
     this.onClick.emit(currentUser);
   }
 }

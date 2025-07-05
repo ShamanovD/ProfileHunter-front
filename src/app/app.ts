@@ -34,13 +34,13 @@ export class App {
     sourceType: SourceType.TELEGRAM,
     linkedSearchFilter: {
       startNodeType: SourceType.TELEGRAM,
-      sourceTypes: [SourceType.TELEGRAM, SourceType.INSTAGRAM, SourceType.TWITTER, SourceType.YOUTUBE],
+      sourceTypes: [SourceType.TELEGRAM, SourceType.INSTAGRAM, SourceType.X, SourceType.YOUTUBE],
       searchType: SearchType.QUICK
     }
   }
 
   private searchSubscription: Subscription | undefined;
-  private linkedSearchSubscription: Subscription | undefined; // Новая подписка для связанного поиска
+  private linkedSearchSubscription: Subscription | undefined;
   private userFullInfoSubscription: Subscription | undefined;
 
   constructor(private readonly searchService: SearchService) {
@@ -70,12 +70,10 @@ export class App {
       this.linkedSearchSubscription = this.searchService.searchLinkedNodes(this.searchModelFilter)
         .subscribe({
           next: (linkedAccountsData) => {
-            console.log('Связанные аккаунты получены:', linkedAccountsData);
-            this.linkedUsers = linkedAccountsData; // Обновляем список связанных аккаунтов
+            this.linkedUsers = linkedAccountsData;
           },
           error: (linkedSearchError) => {
-            console.error('Ошибка при поиске связанных аккаунтов:', linkedSearchError);
-            alert('Ошибка при загрузке связанных аккаунтов: ' + (linkedSearchError.error?.message ?? linkedSearchError.message));
+            console.error(linkedSearchError);
           }
         });
     });

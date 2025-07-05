@@ -24,9 +24,8 @@
         <h3 class="modal-form__section-title">Platforms to search</h3>
         <div class="modal-form__checkbox-grid">
           @for (sourceType of sourceTypes; track sourceType) {
-            <!-- Каждый элемент также обернут в label -->
             <label class="checkbox-label">
-              <input type="checkbox" [value]="sourceType"
+              <input type="checkbox" [value]="sourceTypeMap[sourceType].name"
                      (change)="onPlatformChange($event)"
                      [checked]="form.get('sourceTypes')?.value.includes(sourceType)">
               <span class="checkbox-custom"></span>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {SearchModel} from '../model/search-model';
-import {Observable} from 'rxjs';
+import {Observable, shareReplay} from 'rxjs';
 import {UserInfo} from '../model/user-info';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {UserFullInfo} from '../model/user-full-info';
@@ -11,8 +11,11 @@ import {UserFullInfo} from '../model/user-full-info';
 export class SearchService {
 
   private readonly apiUrl = 'http://localhost:8080/'; // Базовый URL твоего бэкенда
+  fieldDictionary!: { [key: string]: any };
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {
+    this.getFieldDictionary();
+  }
 
   searchStartNode(item: SearchModel): Observable<UserInfo> {
     let params = new HttpParams()
@@ -43,6 +46,13 @@ export class SearchService {
     return this.http.get<UserFullInfo>(`${this.apiUrl}search/info/full`, {
       params: params
     })
+  }
+
+  getFieldDictionary(): void {
+    this.http.get(this.apiUrl + 'dictionary/fieldDictionary')
+      .pipe(shareReplay(1)).subscribe(item => {
+        this.fieldDictionary = item;
+      })
   }
 
 }

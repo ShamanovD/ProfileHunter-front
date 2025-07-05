@@ -9,36 +9,27 @@
     </button>
 
     <header class="profile-header">
-      <img id="main-photo" [src]="userFullInfo.image" alt="Фото профиля" class="profile-main-photo">
       <div class="profile-gallery">
-        <!--        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" alt="Миниатюра 1" class="gallery-thumb active" data-full-src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop">-->
-        <!--        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop" alt="Миниатюра 2" class="gallery-thumb" data-full-src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop">-->
-        <!--        <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=1923&auto=format&fit=crop" alt="Миниатюра 3" class="gallery-thumb" data-full-src="https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=1923&auto=format&fit=crop">-->
+        <img id="main-photo" [src]="currentPhoto" alt="Фото профиля" class="profile-main-photo">
+
+        @for (profilePhoto of userFullInfo.profilePhotos; track profilePhoto) {
+          <img [src]="profilePhoto" (click)="currentPhoto = profilePhoto" class="gallery-thumb">
+        }
       </div>
     </header>
 
     <main class="profile-body">
       <div class="profile-identity">
-        <h2 class="profile-fullname">{{ userFullInfo.firstName || '' + ' ' + userFullInfo.lastName || '' }}</h2>
-        <p class="profile-username">{{ userFullInfo.username }}</p>
+        <h2 class="profile-fullname">{{ (userFullInfo.firstName || '') + ' ' + (userFullInfo.lastName || '') }}</h2>
+        <a [href]="userFullInfo.url" class="profile-username">{{ userFullInfo.username }}</a>
       </div>
       <div class="profile-details">
-        <div class="detail-item">
-          <span class="detail-label">Birthday</span>
-          <span class="detail-value">{{ userFullInfo.birthday }}</span>
-        </div>
-        <!--        <div class="detail-item">-->
-        <!--          <span class="detail-label">Country</span>-->
-        <!--          <span class="detail-value">{{ userFullInfo.c}}</span>-->
-        <!--        </div>-->
-        <div class="detail-item">
-          <span class="detail-label">Platform</span>
-          <span class="detail-value">{{ userFullInfo.sourceType }}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Email</span>
-          <span class="detail-value">{{ userFullInfo.email }}</span>
-        </div>
+        @for (metaInfo of userFullInfo.metaInfoMap | keyvalue; track metaInfo) {
+          <div class="detail-item">
+            <span class="detail-label">{{ fieldDictionary[metaInfo.key] || metaInfo.key }}</span>
+            <span class="detail-value">{{ metaInfo.value }}</span>
+          </div>
+        }
       </div>
     </main>
   </div>

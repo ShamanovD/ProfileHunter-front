@@ -22,23 +22,18 @@ import {style} from '../model/graph-style';
 })
 export class GraphComponent implements AfterViewInit, OnChanges {
 
-  @ViewChild('cy') cyContainer!: ElementRef; // Используем ViewChild для получения ссылки на элемент
+  @ViewChild('cy') cyContainer!: ElementRef;
 
-  cytoscapeInstance!: cytoscape.Core; // Переименуем для ясности
+  cytoscapeInstance!: cytoscape.Core;
 
   @Input() linkedUsers!: UserInfo[];
   @Input() currentUser!: UserInfo;
 
   @Output() onDoubleClick = new EventEmitter<UserInfo>();
 
-  // Отслеживаем изменения входных свойств
   ngOnChanges(changes: SimpleChanges): void {
-    // Проверяем, изменились ли currentUser или linkedUsers
     if (changes['currentUser'] || changes['linkedUsers']) {
-      // Убедимся, что currentUser и linkedUsers существуют и не пусты
-      // И что элемент Cytoscape контейнер уже доступен
       if (this.currentUser?.username && this.cyContainer) {
-        // Только если данные присутствуют, вызываем обновление графа
         this.updateGraph();
       }
     }
@@ -51,12 +46,10 @@ export class GraphComponent implements AfterViewInit, OnChanges {
   }
 
   private initCytoscape(): void {
-    // Уничтожаем старый экземпляр, если он есть, перед созданием нового
     if (this.cytoscapeInstance) {
       this.cytoscapeInstance.destroy();
     }
 
-    // Если контейнер еще не доступен, выходим
     if (!this.cyContainer?.nativeElement) {
       console.warn('Cytoscape container not found.');
       return;
@@ -65,14 +58,13 @@ export class GraphComponent implements AfterViewInit, OnChanges {
     console.log('Инициализация Cytoscape с текущим пользователем:', this.currentUser);
 
     this.cytoscapeInstance = cytoscape({
-      container: this.cyContainer.nativeElement, // Используем ElementRef
-      // Другие настройки Cytoscape
-      elements: this.buildGraphElements(), // Выносим логику построения элементов в отдельный метод
-      style: style as StylesheetStyle[],
+      container: this.cyContainer.nativeElement,
+
+      elements: this.buildGraphElements(),
+      style: style,
       layout: layout,
     });
 
-    // Опционально: Добавьте обработчики событий Cytoscape здесь
     this.cytoscapeInstance.on('dblclick', 'node', (evt) => {
       const node = evt.target;
       console.log('clicked dblclick');
@@ -83,47 +75,36 @@ export class GraphComponent implements AfterViewInit, OnChanges {
   }
 
   private updateGraph(): void {
-    // Если Cytoscape еще не инициализирован, инициализируем его
     if (!this.cytoscapeInstance) {
       this.initCytoscape();
       return;
     }
 
-    // Очищаем существующие элементы
     this.cytoscapeInstance.elements().remove();
 
-    // Добавляем новые элементы
     const newElements = this.buildGraphElements();
     this.cytoscapeInstance.add(newElements);
 
-    // Применяем макет, чтобы узлы перераспределились
-    this.cytoscapeInstance.layout({
-      name: 'cose', // Или любой другой макет, который вы предпочитаете
-      animate: true, // Анимировать перераспределение
-      fit: true,
-      padding: 50,
-      nodeDimensionsIncludeLabels: true
-    }).run();
+    this.cytoscapeInstance.layout(layout).run();
 
-    console.log('Граф обновлен с текущим пользователем:', this.currentUser);
+    console.log('Graph updated:', this.currentUser);
   }
 
   private buildGraphElements(): any[] {
     const elements: any[] = [];
 
-    // Добавляем центральный узел (currentUser)
     if (this.currentUser?.username) {
       elements.push({
         data: {
-          id: this.currentUser.id, // Используем ID или username как ID узла
+          id: this.currentUser.id,
           username: this.currentUser.username,
           fullName: `${this.currentUser.firstName || ''} ${this.currentUser.lastName || ''}`.trim(),
           sourceType: this.currentUser.sourceType,
           image: this.currentUser.image,
           description: this.currentUser.description
         },
-        classes: 'center-node', // Добавляем класс для стилизации центрального узла
-        position: { x: 0, y: 0 } // Можно оставить эту позицию, но макет ее все равно переопределит
+        classes: 'center-node',
+        position: { x: 0, y: 0 }
       });
     } else {
       console.warn('currentUser не определен или не имеет username.');
@@ -144,13 +125,11 @@ export class GraphComponent implements AfterViewInit, OnChanges {
               image: user.image,
               description: user.description
             },
-            // position: { x: ..., y: ... } // Позиции будут заданы макетом
           });
 
-          // Добавляем ребро от центрального пользователя к связанному
           elements.push({
             data: {
-              id: `edge_${currentUserNodeId}_${linkedUserNodeId}`, // Уникальный ID для ребра
+              id: `edge_${currentUserNodeId}_${linkedUserNodeId}`,
               source: currentUserNodeId,
               target: linkedUserNodeId
             }

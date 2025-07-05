@@ -10,8 +10,8 @@
       <label for="sourceSearch" class="search-form__label">Source search</label>
 
       <select id="sourceSearch" class="search-form__selector" formControlName="sourceType">
-        @for (item of searchTypes; track item) {
-          <option [value]="item">{{ item }}</option>
+        @for (item of sourceTypes; track item) {
+          <option [value]="item">{{ sourceTypeMap[item].name }}</option>
         }
       </select>
     </div>

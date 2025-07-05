@@ -1,4 +1,3 @@
-/* --- Стили для Модального Окна --- */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 .modal-backdrop {
@@ -51,7 +50,6 @@
   background-color: var(--color-bg-light);
 }
 
-/* --- Стили для Формы внутри Модального Окна --- */
 .modal-form {
   display: flex;
   flex-direction: column;
@@ -75,7 +73,6 @@
   color: var(--color-white);
 }
 
-/* Кастомные Radio-кнопки */
 .radio-group {
   display: flex;
   flex-wrap: wrap;
@@ -173,7 +170,6 @@
   opacity: 1;
 }
 
-/* Кнопки */
 .buttons {
   margin-top: 1rem;
   display: flex;

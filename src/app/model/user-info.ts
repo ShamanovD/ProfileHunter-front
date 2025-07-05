@@ -9,5 +9,6 @@ export interface UserInfo {
   description: string;
   sourceType: SourceType;
   image: string;
+  url: string;
 
 }

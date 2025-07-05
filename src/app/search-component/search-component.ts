@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {SourceType} from '../model/source-type';
+import {SourceType, SourceTypeMap} from '../model/source-type';
 import {SearchModel} from '../model/search-model';
 
 @Component({
@@ -14,7 +14,9 @@ import {SearchModel} from '../model/search-model';
 export class SearchComponent implements OnInit {
 
   form!: FormGroup;
-  searchTypes: string[] = Object.values(SourceType);
+  sourceTypes: SourceType[] = Object.entries(SourceType).map(item => item[1]);
+
+  readonly sourceTypeMap = SourceTypeMap;
 
   @Input() searchModel!: SearchModel;
 
@@ -35,4 +37,5 @@ export class SearchComponent implements OnInit {
   onShowExtendedSettings() {
     this.showExtendedSettings.emit();
   }
+
 }
